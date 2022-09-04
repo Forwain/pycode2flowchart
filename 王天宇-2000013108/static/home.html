@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+
+        <title>py流程图生成</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="https://cdn.luogu.com.cn/css/amazeui.min.css">
+        <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.3.0/raphael.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="http://flowchart.js.org/flowchart-latest.js"></script>
+        <script src="./static/js/dropzone.js"> </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/mode-python.min.js" ></script>
+        <script src="./static/js/bootstrap.css"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/theme-tomorrow_night_eighties.min.js"></script>
+        <link rel="stylesheet" href="/wp-content/themes/runoob/style.css?v=1.165" type="text/css" media="all">
+        <link rel="stylesheet" type="text/css" href="//static.runoob.com/assets/libs/hl/prettify.css">
+        <style>
+            body{
+                background: url(./static/img/background.jpg) no-repeat;
+                background-size:cover;  
+                background-attachment: fixed;
+                background-position: center center;
+			}
+            .dropzone{
+                margin: 2% 10%;
+            }
+            .footer{
+                color: rgba(0, 0, 0, 0.5);
+                font-size: small;
+                text-align: center;
+                height: auto;
+                position: fixed;
+                bottom: 0;
+                width: 100%;
+                border-top: 1px solid black; /* for demo */
+                background: transparent; /* for demo */
+            }
+        </style>
+    </head>
+
+    <body>
+        <nav class="navbar navbar-default" role="navigation">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+                <span class="sr-only">Toggle Navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-header">
+                <a href="#" class="navbar-brand" id="nav-brand-itheima">
+                    生成流程图
+                </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/help">使用帮助</a></li>
+                <li><a href="/about">关于本项目</a></li>
+            </ul>
+            </div>
+        </nav>
+
+        <div class="container" align="center">
+            <div class="row" style="max-width: 2060px;">
+                <div style="height: 80px; margin-top: 20px;" align="center">
+                    <h1>输入代码或者上传文件生成python代码流程图</h1>
+                </div>
+
+                <div class="row" >
+                    <div class="col-md-5 col-md-offset-1">
+                        <div class="row">
+                            <div class="editor-wrapper">
+                                <pre id="code" style="min-height: 400px; max-width: 800px; font-size: 16px;"></pre>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <form class="dropzone" id="mydropzone" style="background-color: rgba(13, 44, 102, 0.3);">
+                                <div class="am-text dz-message" style="color: rgba(0, 0, 0, 0.5);"> 
+                                    <br>
+                                    点击或拖拽.py文件到此处上传
+                                    <br><br>
+                                </div>
+                            </form>
+                            <button id="run" type="button" class="am-btn am-btn-primary">Run</button>
+                            <button id="downloadpng" onclick="javascript: download(option='PNG')" hidden="true" class="am-btn am-btn-default"> download as PNG </button>
+                            <button id="downloadsvg" onclick="javascript: download(option='SVG')" hidden="true" class="am-btn am-btn-default"> download as SVG </button>
+                            <button id="downloadsvg" onclick="javascript: demo1()" class="am-btn am-btn-default"> Sample </button>
+                        </div>
+                    </div>
+
+                    <div class="col-md-5 col-md-offset-1">
+                        <div id="canvas">
+                            <h1 id="msg-1" style="height: 90px; margin-top: 90px; color: rgba(0, 0, 0, 0.2); user-select: none;" class="">这里将生成你的流程图</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div hidden="true" id="demo1">
+a, b = input()
+if a == 0:
+    print('a')
+    return b
+elif b == 0:
+    print('b')
+    return a
+else:
+    return 0
+        </div>
+        <script type="text/javascript">
+            function demo1()
+            {
+                // 展示例子的函数
+                var demo = document.getElementById('demo1');
+                content = demo.innerHTML;
+                var editor = ace.edit('code');
+                editor.setValue(content);
+            }
+            var img_url;
+            function download(option){
+                // 下载，两种方式，svg或png
+                var svg = document.getElementById('canvas').innerHTML; //获取svg
+                var img = document.createElement('img');
+                img.src = 'data:image/svg+xml;base64,'+window.btoa(unescape(encodeURIComponent(svg)));
+                var canvas = document.createElement('canvas'); //新建画布
+                var ctx = canvas.getContext('2d', {alfha: false});
+                img.onload = function()
+                {
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    ctx.drawImage(img,0,0);
+                    var img_url;
+                    switch(option) {
+                        case 'PNG':
+                            img_url = canvas.toDataURL('image/png', 1.0);
+                            break;
+                        case 'SVG':
+                            img_url = img.src;
+                            break;
+                        }
+                    const a = document.createElement('a');
+                    const event = new MouseEvent('click');
+                    a.download = 'flowchart' || 'photo';
+                    a.href = img_url;
+                    a.dispatchEvent(event);
+                }
+            }
+            $(document).ready(function(){
+                var btn = document.getElementById("run"),
+                cd = document.getElementById("code"),
+                chart;
+                var editor = ace.edit('code');
+                // var dsleditor = ace.edit('dsl');
+                // var oldcode = "";
+                editor.setTheme("ace/theme/tomorrow_night_eighties");
+                editor.getSession().setMode("ace/mode/python");
+                btn.onclick = function () {
+                    var code = editor.getValue();
+                    $('#downloadpng').attr('hidden', false);
+                    $('#downloadsvg').attr('hidden', false);
+                    if(chart) chart.clean();
+
+                    $.post('/parsepy',{'pycode':code}, function(msg){
+                        // alert(msg);
+                        if(msg == "")
+                        {
+                            alert("流程图未成功生成，请检查代码的合理性")
+                        }
+                        chart = flowchart.parse(msg);
+                        // dsleditor.setValue(msg);
+                        chart.drawSVG('canvas');
+                        $('#msg-1').html("");
+                        // oldcode = code;
+                    })
+                }
+                // var previewNode = document.querySelector("#template");
+                // var previewTemplate = previewNode.parentNode.innerHTML;
+                // previewNode.parentNode.removeChild(previewNode);
+                Dropzone.options.mydropzone = {
+                    url: '/file-upload',
+                    addRemoveLinks: false,
+                    maxFiles: 1,
+                    dictMaxFileExceeded: '只能上传一个python文件！',
+                    method: 'post',
+                    acceptedFiles: ".py",
+                    init: function(){
+                        this.on('success', function(file, msg){
+                            // alert(msg);
+                            mydropzone.reset();
+                            editor.setValue(msg);
+                            if(chart) chart.clean();
+                            this.removeAllFiles(true);
+                        })
+                    }
+                }
+            })
+        </script>
+    </body>
+    <footer>
+        <div class="footer">
+
+            @2022春 程序设计思维@
+            <br>
+            @python流程图自动生成@
+        </div>
+
+    </footer>
+</html>

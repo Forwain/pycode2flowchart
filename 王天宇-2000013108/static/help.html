@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+
+        <title>py流程图生成</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="https://cdn.luogu.com.cn/css/amazeui.min.css">
+        <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.3.0/raphael.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="http://flowchart.js.org/flowchart-latest.js"></script>
+        <script src="./static/js/dropzone.js"> </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/mode-python.min.js" ></script>
+        <script src="./static/js/bootstrap.css"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/theme-tomorrow_night_eighties.min.js"></script>
+        <link rel="stylesheet" href="/wp-content/themes/runoob/style.css?v=1.165" type="text/css" media="all">
+        <link rel="stylesheet" type="text/css" href="//static.runoob.com/assets/libs/hl/prettify.css">
+        <style>
+            body{
+                background: rgb(230, 230, 230);
+                background-size:cover;  
+                background-attachment: fixed;
+                background-position: center center;
+			}
+            .footer{
+                color: rgba(0, 0, 0, 0.5);
+                font-size: small;
+                text-align: center;
+                height: auto;
+                position: bottom;
+                bottom: 0;
+                width: 100%;
+                border-top: 1px solid black; /* for demo */
+                background: transparent; /* for demo */
+            }
+            .img{
+                height: auto;
+                width: 75%;
+                position: fixed;
+                bottom: 2px;
+                position: relative;
+            }
+        </style>
+    </head>
+
+    <body>
+        <nav class="navbar navbar-default" role="navigation">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+                <span class="sr-only">Toggle Navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-header">
+                <a href="/" class="navbar-brand" id="nav-brand-itheima">
+                    生成流程图
+                </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/help" class="activated">使用帮助</a></li>
+                <li><a href="/about">关于本项目</a></li>
+            </ul>
+            </div>
+        </nav>
+        <nav class="navbar navbar-default" role="navigation" style="position: fixed; bottom: 20px;">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+                <span class="sr-only">Toggle Navigation</span>
+                <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-header">
+
+                <a href="/" class="navbar-brand" id="nav-brand-itheima">
+                    首页
+                </a>
+            </div>
+        </nav>
+        <div class="container" align="center">
+            <div class="row" style="max-width: 1660px; background-color: white;">
+                <div style="height: 80px; margin-top: 20px;" align="center">
+                    <h1>生成python代码流程图-帮助</h1>
+                </div>
+            </div>
+
+            <div class="row" style="max-width: 1660px; background-color: white; margin-top: 20px;">
+                <div style="height: 80px; margin-top: 60px; margin-left: 60px;" align="left">
+                    <h2>主页面布局</h2>
+                </div>
+
+                <img src="./static/img/img1.png" class="img" alt="网页布局" style="margin-bottom: 60px;"><br>
+            </div>
+                
+            <div class="row" style="max-width: 1660px; background-color: white; margin-top: 20px;">
+                <div style="height: 80px; margin-top: 60px; margin-left: 60px;" align="left">
+                    <h2>使用步骤：</h2>
+                </div>
+                <div style="font-size: 20px; margin: 60px; margin-top: 0px; margin-left: 100px; text-align: left; line-height: 42px;">
+
+                    1. 传入python代码，可以在代码框中直接输入，或者拖拽上传python文件，注意后缀名需要为.py <br>
+                    2. 点击下方的Run按钮。如果代码输入无误，结果会在右侧显示出来 <br>
+                    3. 点击Download as SVG，以svg图像格式保存到本地；或者点击Download as PNG，以png图像格式保存到本地 <br>
+                    4. 如果出现问题，请检查python代码的正确性 <br>
+                    5. 由于技术限制，目前支持的代码结构还比较简单。暂时不支持函数和类的嵌套； <br>
+                    6. 如果代码中接连定义了许多函数，会生成第一个函数的流程图，而忽略后面的函数 <br>
+                    7. python代码中允许出现未定义的变量，函数等，但不允许其他的语法错误（如括号不匹配，语句的格式错误，等等） <br>
+                </div>
+            </div>
+        </div>
+
+    </body>
+
+    <footer>
+        <div class="footer" style="margin-top: 60px;">
+            @2022春 程序设计思维@
+            <br>
+            @python流程图自动生成@
+        </div>
+
+    </footer>
+</html>

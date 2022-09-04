@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+
+        <title>py流程图生成</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="https://cdn.luogu.com.cn/css/amazeui.min.css">
+        <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.3.0/raphael.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="http://flowchart.js.org/flowchart-latest.js"></script>
+        <script src="./static/js/dropzone.js"> </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/mode-python.min.js" ></script>
+        <script src="./static/js/bootstrap.css"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/theme-tomorrow_night_eighties.min.js"></script>
+        <link rel="stylesheet" href="/wp-content/themes/runoob/style.css?v=1.165" type="text/css" media="all">
+        <link rel="stylesheet" type="text/css" href="//static.runoob.com/assets/libs/hl/prettify.css">
+        <style>
+            body{
+                background: rgb(230, 230, 230);
+                background-size:cover;  
+                background-attachment: fixed;
+                background-position: center center;
+			}
+            .footer{
+                color: rgba(0, 0, 0, 0.5);
+                font-size: small;
+                text-align: center;
+                height: auto;
+                position: bottom;
+                bottom: 0;
+                width: 100%;
+                border-top: 1px solid black; /* for demo */
+                background: transparent; /* for demo */
+            }
+            .img{
+                height: auto;
+                width: 75%;
+                position: fixed;
+                bottom: 2px;
+                position: relative;
+            }
+        </style>
+    </head>
+
+    <body>
+        <nav class="navbar navbar-default" role="navigation">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+                <span class="sr-only">Toggle Navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-header">
+                <a href="/" class="navbar-brand" id="nav-brand-itheima">
+                    生成流程图
+                </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/help" class="activated">使用帮助</a></li>
+                <li><a href="/about">关于本项目</a></li>
+            </ul>
+            </div>
+        </nav>
+        <nav class="navbar navbar-default" role="navigation" style="position: fixed; bottom: 20px;">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+                <span class="sr-only">Toggle Navigation</span>
+                <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-header">
+
+                <a href="/" class="navbar-brand" id="nav-brand-itheima">
+                    首页
+                </a>
+            </div>
+        </nav>
+        <div class="container" align="center">
+            <div class="row" style="max-width: 1660px; background-color: white; margin-top: 20px;">
+                <div style="height: 80px; margin-top: 60px; margin-left: 60px;" align="left">
+                    <h2>项目简介</h2>
+                </div>
+                <div style="font-size: 20px; margin: 60px; margin-top: 0px; margin-left: 100px; text-align: left; line-height: 42px;">
+                    本项目为2022春季程序设计思维python流程图生成大作业。实现了给定python代码，程序自动生成对应流程图的功能，并配置了相应的前端网页实现。
+                    项目后端由python实现代码的转换，借由python的flask框架完成服务器部分，前端html+js实现最后的流程图绘制。
+                    
+                </div>
+            </div>
+            <div class="row" style="max-width: 1660px; background-color: white; margin-top: 20px;">
+                <div style="font-size: 20px; margin: 60px; margin-left: 100px; line-height: 42px;">
+                    程序设计思维 2022年春季学期大作业：python流程图自动生成
+                    <br>
+                    王天宇 2000013108
+                </div>
+            </div>
+        </div>
+
+    </body>
+
+    <footer>
+        <div class="footer" style="margin-top: 60px;">
+            @2022春 程序设计思维@
+            <br>
+            @python流程图自动生成@
+        </div>
+
+    </footer>
+</html>
